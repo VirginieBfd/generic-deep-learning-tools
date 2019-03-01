@@ -33,6 +33,7 @@ setup(
         'numpy',
         'scikit-image',
         'scipy',
-        'opencv-python'
+        'opencv-python',
+        'keras'
     ],
 )
