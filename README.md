@@ -1,2 +1,2 @@
-# generic-deep-learning-tools-for-cv
+# generic-deep-learning-tools
 Generic Deep Learning tools for Computer Vision
