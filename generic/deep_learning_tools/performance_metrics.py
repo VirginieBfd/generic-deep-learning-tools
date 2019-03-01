@@ -1,4 +1,6 @@
 import keras as K
+from sklearn.metrics import confusion_matrix as cm
+import numpy as np
 
 
 class EvaluationMetrics(object):
@@ -54,3 +56,21 @@ class EvaluationMetrics(object):
         precision_score = self.precision(y_true, y_pred)
         # Calculate f1_score
         return 2 * (precision_score * recall_score) / (precision_score + recall_score)
+
+    def confusion_matrix(self, y_true, y_pred):
+        """Implementation of the confusion matrix.
+        :param y_true: numpy.array
+        :param y_pred: numpy.array
+        :rtype: numpy.array
+        """
+
+        return cm(y_true, y_pred)
+
+    def normalised_confusion_matrix(self, y_true, y_pred):
+        """Implementation of the normalised confusion matrix.
+        :param y_true: numpy.array
+        :param y_pred: numpy.array
+        :rtype: numpy.array
+        """
+        conf_mat =  self.confusion_matrix(y_true, y_pred)
+        return conf_mat.astype('float') / conf_mat.sum(axis=1)[:, np.newaxis]
