@@ -4,7 +4,7 @@ import seaborn as sns
 
 class Plotter(object):
 
-    def plot_confustion_matrix(self, confusion_matrix, ticklabels, figsize=(12, 12)):
+    def plot_confusion_matrix(self, confusion_matrix, ticklabels, figsize=(12, 12)):
         """
         :type confusion_matrix: numpy.array
         :type ticklabels: list[str]
