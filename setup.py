@@ -34,6 +34,7 @@ setup(
         'scikit-image',
         'scipy',
         'opencv-python',
-        'keras'
+        'keras',
+        'sklearn'
     ],
 )
