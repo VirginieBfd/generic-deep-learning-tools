@@ -13,7 +13,7 @@ class Plotter(object):
         """
         fig = plt.figure(figsize=figsize)
         sns.heatmap(confusion_matrix, linewidths=.5, cmap="YlGnBu", xticklabels=ticklabels,
-                    annot=True, yticklabels=ticklabels, cbar=False)
+                    annot=True, yticklabels=ticklabels, cbar=False, fmt='g')
         plt.ylabel('True label')
         plt.xlabel('Predicted label')
         return fig
