@@ -2,8 +2,9 @@ import numpy as np
 
 
 class PeakDetector(object):
-
-    def detect_peaks(self, x, mph=None, mpd=1, threshold=0, edge='rising', kpsh=False, valley=False):
+    def detect_peaks(
+        self, x, mph=None, mpd=1, threshold=0, edge="rising", kpsh=False, valley=False
+    ):
         """One way to detect peaks (local maxima) or valleys (local minima) in data is to use the property that a peak
         (or valley) must be greater (or smaller) than its immediate neighbors. The class detects peaks (or valleys)
         based on this feature and other characteristics.
@@ -52,7 +53,7 @@ class PeakDetector(object):
 
         """
 
-        x = np.atleast_1d(x).astype('float64')
+        x = np.atleast_1d(x).astype("float64")
         if x.size < 3:
             return np.array([], dtype=int)
         if valley:
@@ -70,15 +71,21 @@ class PeakDetector(object):
         if not edge:
             ine = np.where((np.hstack((dx, 0)) < 0) & (np.hstack((0, dx)) > 0))[0]
         else:
-            if edge.lower() in ['rising', 'both']:
+            if edge.lower() in ["rising", "both"]:
                 ire = np.where((np.hstack((dx, 0)) <= 0) & (np.hstack((0, dx)) > 0))[0]
-            if edge.lower() in ['falling', 'both']:
+            if edge.lower() in ["falling", "both"]:
                 ife = np.where((np.hstack((dx, 0)) < 0) & (np.hstack((0, dx)) >= 0))[0]
         ind = np.unique(np.hstack((ine, ire, ife)))
         # handle NaN's
         if ind.size and indnan.size:
             # NaN's and values close to NaN's cannot be peaks
-            ind = ind[np.in1d(ind, np.unique(np.hstack((indnan, indnan - 1, indnan + 1))), invert=True)]
+            ind = ind[
+                np.in1d(
+                    ind,
+                    np.unique(np.hstack((indnan, indnan - 1, indnan + 1))),
+                    invert=True,
+                )
+            ]
         # first and last values of x cannot be peaks
         if ind.size and ind[0] == 0:
             ind = ind[1:]
@@ -98,8 +105,9 @@ class PeakDetector(object):
             for i in range(ind.size):
                 if not idel[i]:
                     # keep peaks with the same height if kpsh is True
-                    idel = idel | (ind >= ind[i] - mpd) & (ind <= ind[i] + mpd) \
-                           & (x[ind[i]] > x[ind] if kpsh else True)
+                    idel = idel | (ind >= ind[i] - mpd) & (ind <= ind[i] + mpd) & (
+                        x[ind[i]] > x[ind] if kpsh else True
+                    )
                     idel[i] = 0  # Keep current peak
             # remove the small peaks and sort back the indices by their occurrence
             ind = np.sort(ind[~idel])

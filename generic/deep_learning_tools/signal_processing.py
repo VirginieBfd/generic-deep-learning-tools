@@ -4,7 +4,6 @@ from scipy.fftpack import fft
 
 
 class TimeFrequencyTransformator(object):
-
     def __init__(self, frequency, n_samples, t_n):
         """
         :type frequency: flot
@@ -53,7 +52,7 @@ class TimeFrequencyTransformator(object):
         """
         f_values = np.linspace(0.0, 1.0 / (2.0 * self.T), self.n_samples // 2)
         fft_values_ = fft(y_values)
-        fft_values = 2.0 / self.n_samples * np.abs(fft_values_[0:self.n_samples // 2])
+        fft_values = 2.0 / self.n_samples * np.abs(fft_values_[0 : self.n_samples // 2])
         return f_values, fft_values
 
     def get_values(self, y_values):
@@ -84,6 +83,6 @@ class TimeFrequencyTransformator(object):
         :rtype: numpy.array, numpy.array
         """
         x_values = np.array([self.T * jj for jj in range(0, self.n_samples)])
-        y_values = np.correlate(y_values, y_values, mode='full')
-        y_values = y_values[len(y_values) // 2:]
+        y_values = np.correlate(y_values, y_values, mode="full")
+        y_values = y_values[len(y_values) // 2 :]
         return x_values, y_values

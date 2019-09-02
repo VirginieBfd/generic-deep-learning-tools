@@ -12,8 +12,17 @@ class Plotter(object):
         :rtype: matplotlib.Figure
         """
         fig = plt.figure(figsize=figsize)
-        sns.heatmap(confusion_matrix, linewidths=.5, cmap="YlGnBu", xticklabels=ticklabels,
-                    annot=True, yticklabels=ticklabels, cbar=False, fmt='g')
-        plt.ylabel('True label')
-        plt.xlabel('Predicted label')
+        sns.heatmap(
+            confusion_matrix,
+            cmap="YlGnBu",
+            xticklabels=ticklabels,
+            annot=True,
+            yticklabels=ticklabels,
+            cbar=False,
+            fmt=".2f",
+        )
+        plt.ylabel("True label")
+        plt.xlabel("Predicted label")
+        plt.xticks(rotation=45)
+        plt.yticks(rotation=45)
         return fig

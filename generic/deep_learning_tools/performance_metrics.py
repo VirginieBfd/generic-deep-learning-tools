@@ -4,7 +4,6 @@ import numpy as np
 
 
 class EvaluationMetrics(object):
-
     def jaccard_index(self, y_true, y_pred):
         """Implementation of intersection over union method for binary arrays.
         :param y_true: numpy.array
@@ -57,20 +56,22 @@ class EvaluationMetrics(object):
         # Calculate f1_score
         return 2 * (precision_score * recall_score) / (precision_score + recall_score)
 
-    def confusion_matrix(self, y_true, y_pred):
+    def confusion_matrix(self, y_true, y_pred, labels=None):
         """Implementation of the confusion matrix.
         :param y_true: numpy.array
         :param y_pred: numpy.array
+        :param labels: list[str] | list[int]
         :rtype: numpy.array
         """
 
-        return cm(y_true, y_pred)
+        return cm(y_true, y_pred, labels=labels)
 
-    def normalised_confusion_matrix(self, y_true, y_pred):
+    def normalised_confusion_matrix(self, y_true, y_pred, labels=None):
         """Implementation of the normalised confusion matrix.
         :param y_true: numpy.array
         :param y_pred: numpy.array
+       :param labels: list[str] | list[int]
         :rtype: numpy.array
         """
-        conf_mat =  self.confusion_matrix(y_true, y_pred)
-        return conf_mat.astype('float') / conf_mat.sum(axis=1)[:, np.newaxis]
+        conf_mat = self.confusion_matrix(y_true, y_pred, labels)
+        return conf_mat.astype("float") / conf_mat.sum(axis=1)[:, np.newaxis]
